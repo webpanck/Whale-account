@@ -2,11 +2,6 @@
     <Layout>
       <Tabs class-prefix="type" :data-source="recordTypeList" :value.sync="type"></Tabs>
       <Tabs class-prefix="interval" :data-source="intervalList" :value.sync="interval"></Tabs>
-      <div>
-        type: {{type}}
-        <br>
-        interval: {{interval}}
-      </div>
     </Layout>
 </template>
 
@@ -37,5 +32,8 @@
         display: none;
       }
     }
+  }
+  ::v-deep .interval-tabs-item {
+    height: 48px;
   }
 </style>
