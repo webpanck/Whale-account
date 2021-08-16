@@ -47,7 +47,7 @@
       }
     }
     tagString(tags: Tag[]) {
-      const tagNames = [];
+      const tagNames:string[] = [];
       if(tags.length === 0) {
         return '无';
       } else {
@@ -62,10 +62,10 @@
     }
     get groupedList() {
       const {recordList} = this;
-      if(recordList.l === 0) {return [];}
+      if(recordList.length === 0) {return [];}
       const newList = clone(recordList)
-          .filter(r => r.type === this.type)
-          .sort((a, b) => dayjs(b.createdAt).valueOf() - dayjs(a.createdAt).valueOf());
+          .filter((r:RecordItem) => r.type === this.type)
+          .sort((a: RecordItem, b: RecordItem) => dayjs(b.createdAt).valueOf() - dayjs(a.createdAt).valueOf());
       if(newList.length === 0) {return [] as Result;}
       type Result = {title: string, total?: number, items: RecordItem[]}[];
       const result: Result = [{title: dayjs(newList[0].createdAt).format('YYYY-MM-DD'), items: [newList[0]]}];

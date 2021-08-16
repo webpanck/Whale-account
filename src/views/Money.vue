@@ -37,7 +37,7 @@
     onUpdateNotes(value: string) {
       this.record.notes = value;
     }
-    onUpdateTags(value: string[]) {
+    onUpdateTags(value: Tag[]) {
       this.record.tags = value;
     }
     saveRecord() {
