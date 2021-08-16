@@ -47,7 +47,15 @@
       }
     }
     tagString(tags: Tag[]) {
-      return tags.length === 0 ? '无' : tags.join(',');
+      const tagNames = [];
+      if(tags.length === 0) {
+        return '无';
+      } else {
+        tags.forEach(tag => {
+          tagNames.push(tag.name);
+        })
+        return tagNames.join(',');
+      }
     }
     get recordList() {
       return this.$store.state.recordList;

@@ -5,7 +5,7 @@
     <div class="notes">
       <FormItem @update:value="onUpdateNotes" field-name="备注" placeholder="在这里输入备注"></FormItem>
     </div>
-    <Tags></Tags>
+    <Tags @update:value="onUpdateTags"></Tags>
   </Layout>
 </template>
 
@@ -36,6 +36,9 @@
     }
     onUpdateNotes(value: string) {
       this.record.notes = value;
+    }
+    onUpdateTags(value: string[]) {
+      this.record.tags = value;
     }
     saveRecord() {
       this.$store.commit('createRecord', this.record);
