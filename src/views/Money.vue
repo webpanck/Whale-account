@@ -3,7 +3,7 @@
     <NumberPad :value.sync="record.amount" @submit="saveRecord"></NumberPad>
     <Tabs :data-source="recordTypeList" :value.sync="record.type"></Tabs>
     <div class="notes">
-      <FormItem @update:value="onUpdateNotes" field-name="备注" placeholder="在这里输入备注"></FormItem>
+      <FormItem @update:value="onUpdateNotes" :value="record.notes" field-name="备注" placeholder="在这里输入备注"></FormItem>
     </div>
     <Tags @update:value="onUpdateTags"></Tags>
   </Layout>
@@ -42,6 +42,10 @@
     }
     saveRecord() {
       this.$store.commit('createRecord', this.record);
+      if(this.$store.state.createRecordError === null) {
+        window.alert('添加成功！');
+        this.record.notes = '';
+      }
     }
   }
 </script>
