@@ -41,6 +41,9 @@
       this.record.tags = value;
     }
     saveRecord() {
+      if(!this.record.tags || this.record.tags.length === 0) {
+        return window.alert('请选择至少一个标签');
+      }
       this.$store.commit('createRecord', this.record);
       if(this.$store.state.createRecordError === null) {
         window.alert('添加成功！');
