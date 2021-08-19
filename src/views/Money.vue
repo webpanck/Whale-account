@@ -50,7 +50,6 @@
       }
       this.$store.commit('createRecord', this.record);
       if(this.$store.state.createRecordError === null) {
-        window.alert('添加成功！');
         this.record.notes = '';
       }
     }

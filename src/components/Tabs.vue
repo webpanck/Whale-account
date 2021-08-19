@@ -22,7 +22,7 @@
         selected: item.value === this.value,
         [this.classPrefix+'-tabs-item']: this.classPrefix
       }
-    };
+    }
 
     select(item: DataSourceItem) {
       this.$emit('update:value', item.value);
