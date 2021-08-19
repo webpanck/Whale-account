@@ -1,7 +1,9 @@
 <template>
     <Layout>
       <Tabs class-prefix="type" :data-source="recordTypeList" :value.sync="type"></Tabs>
-      <Chart :options="x"></Chart>
+      <div class="chart-wrapper" ref="chartWrapper">
+        <Chart class="chart" :options="x"></Chart>
+      </div>
       <ol v-if="groupedList.length > 0">
         <li v-for="(group, index) in groupedList" :key="index">
           <h3 class="title">
@@ -64,21 +66,35 @@
     }
     get x() {
       return {
+        grid: {
+          left: 0,
+          right: 0
+        },
         xAxis: {
           type: 'category',
-          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          axisTick: {alignWithLabel: true},
+          axisLine: {lineStyle: {color: '#666'}}
         },
         yAxis: {
-          type: 'value'
+          type: 'value',
+          show: false
         },
         tooltip: {
-          show: true
+          show: true,
+          formatter: '{b}: {c}'
         },
         series: [{
           data: [150, 230, 224, 218, 135, 147, 260],
-          type: 'line'
+          type: 'line',
+          symbolSize: 15,
+          itemStyle: {color: '#666'}
         }]
       }
+    }
+    mounted() {
+      const div = (this.$refs.chartWrapper as HTMLDivElement);
+      div.scrollLeft = div.scrollWidth;
     }
     get recordList() {
       return this.$store.state.recordList;
@@ -116,6 +132,12 @@
 </script>
 
 <style lang="scss" scoped>
+  .chart {
+    width: 430%;
+    &-wrapper {
+      overflow: auto;
+    }
+  }
   ::v-deep {
     .type-tabs-item {
       background: #c4c4c4;
