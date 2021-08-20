@@ -21,6 +21,7 @@
   import {Component} from 'vue-property-decorator';
   import recordTypeList from '@/constants/recordTypeList';
   import Tabs from '@/components/Tabs.vue';
+  import dayjs from 'dayjs';
 
   window.localStorage.setItem('version', '0.0.1');
 
@@ -33,7 +34,7 @@
     }
     recordTypeList = recordTypeList;
     record: RecordItem = {
-      tags: [], notes: '', type: '-', amount: 0, createdAt: new Date().toISOString()
+      tags: [], notes: '', type: '-', amount: 0, createdAt: dayjs(new Date().toISOString()).format('YYYY-MM-DD')
     };
     created() {
       this.$store.commit('fetchRecords');
