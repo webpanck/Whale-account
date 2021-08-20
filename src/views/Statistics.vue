@@ -70,8 +70,8 @@
       const array = [];
       for(let i=0; i<= 29; i++) {
         const dateString = dayjs(today).subtract(i, 'day').format('YYYY-MM-DD');
-        const found = _.find(this.recordList, {createdAt: dateString});
-        array.push({key: dateString, value: found ? found.amount : 0});
+        const found = _.find(this.groupedList, {title: dateString});
+        array.push({key: dateString, value: found ? found.total : 0});
       }
       array.reverse();
       return array;
