@@ -33,6 +33,7 @@
   import dayjs from 'dayjs';
   import clone from '@/lib/clone';
   import Chart from '@/components/Chart.vue';
+  import _ from 'lodash';
 
   @Component({
     components: {Tabs, Chart}
@@ -64,7 +65,20 @@
         return tagNames.join(',');
       }
     }
+    get y() {
+      const today = new Date();
+      const array = [];
+      for(let i=0; i<= 29; i++) {
+        const dateString = dayjs(today).subtract(i, 'day').format('YYYY-MM-DD');
+        const found = _.find(this.recordList, {createdAt: dateString});
+        array.push({date: dateString, value: found ? found.amount : 0});
+      }
+      array.reverse();
+      return array;
+    }
     get x() {
+      const keys = this.y.map(item => dayjs(item.date).format('M-D'));
+      const values = this.y.map(item => item.value);
       return {
         grid: {
           left: 0,
@@ -72,7 +86,7 @@
         },
         xAxis: {
           type: 'category',
-          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          data: keys,
           axisTick: {alignWithLabel: true},
           axisLine: {lineStyle: {color: '#666'}}
         },
@@ -85,7 +99,7 @@
           formatter: '{b}: {c}'
         },
         series: [{
-          data: [150, 230, 224, 218, 135, 147, 260],
+          data: values,
           type: 'line',
           symbolSize: 15,
           itemStyle: {color: '#666'}
