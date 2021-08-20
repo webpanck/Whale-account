@@ -2,7 +2,7 @@
     <Layout>
       <Tabs class-prefix="type" :data-source="recordTypeList" :value.sync="type"></Tabs>
       <div class="chart-wrapper" ref="chartWrapper">
-        <Chart class="chart" :options="x"></Chart>
+        <Chart class="chart" :options="chartOptions"></Chart>
       </div>
       <ol v-if="groupedList.length > 0">
         <li v-for="(group, index) in groupedList" :key="index">
@@ -65,20 +65,20 @@
         return tagNames.join(',');
       }
     }
-    get y() {
+    get keyValueList() {
       const today = new Date();
       const array = [];
       for(let i=0; i<= 29; i++) {
         const dateString = dayjs(today).subtract(i, 'day').format('YYYY-MM-DD');
         const found = _.find(this.recordList, {createdAt: dateString});
-        array.push({date: dateString, value: found ? found.amount : 0});
+        array.push({key: dateString, value: found ? found.amount : 0});
       }
       array.reverse();
       return array;
     }
-    get x() {
-      const keys = this.y.map(item => dayjs(item.date).format('M-D'));
-      const values = this.y.map(item => item.value);
+    get chartOptions() {
+      const keys = this.keyValueList.map(item => dayjs(item.key).format('M-D'));
+      const values = this.keyValueList.map(item => item.value);
       return {
         grid: {
           left: 0,
