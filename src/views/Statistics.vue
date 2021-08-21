@@ -1,8 +1,15 @@
 <template>
     <Layout>
       <Tabs class-prefix="type" :data-source="recordTypeList" :value.sync="type"></Tabs>
-      <div class="chart-wrapper" ref="chartWrapper">
+      <div v-show="flag" class="chart-wrapper" ref="chartWrapper">
         <Chart class="chart" :options="chartOptions"></Chart>
+      </div>
+      <div class="chartButton">
+        <button @click="showChart">
+          <span v-if="flag">收起图表</span>
+          <span v-else>查看图表</span>
+          <Icon name="chart"></Icon>
+        </button>
       </div>
       <ol v-if="groupedList.length > 0">
         <li v-for="(group, index) in groupedList" :key="index">
@@ -34,11 +41,16 @@
   import clone from '@/lib/clone';
   import Chart from '@/components/Chart.vue';
   import _ from 'lodash';
+  import Button from '@/components/Button.vue';
 
   @Component({
-    components: {Tabs, Chart}
+    components: {Button, Tabs, Chart}
   })
   export default class Statistics extends Vue {
+    flag = true;
+    showChart() {
+      this.flag = !this.flag;
+    }
     beautify(string: string) {
       const day = dayjs(string);
       const now = dayjs();
@@ -82,7 +94,9 @@
       return {
         grid: {
           left: 0,
-          right: 0
+          right: 0,
+          top: '8%',
+          bottom: '10%'
         },
         xAxis: {
           type: 'category',
@@ -146,6 +160,21 @@
 </script>
 
 <style lang="scss" scoped>
+  @import "~@/assets/style/helper.scss";
+
+  .chartButton {
+    display: flex;
+    justify-content: center;
+    padding: 12px 0;
+    > button {
+      background: $color-highlight;
+      color: white;
+      border-radius: 4px;
+      border: none;
+      height: 40px;
+      padding: 0 16px;
+    }
+  }
   .chart {
     width: 430%;
     &-wrapper {
