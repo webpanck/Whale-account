@@ -110,12 +110,14 @@
         },
         tooltip: {
           show: true,
-          formatter: '{b}: {c}'
+          formatter: '{b}: {c}',
+          trigger: 'axis'
         },
         series: [{
           data: values,
           type: 'line',
-          symbolSize: 15,
+          // symbol: 'circle',
+          symbolSize: 6,
           itemStyle: {color: '#666'}
         }]
       }
