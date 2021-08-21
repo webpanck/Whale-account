@@ -1,11 +1,13 @@
 <template>
   <div class="numberPad">
-    <div class="output">{{ output }}</div>
+    <div class="output"><span>{{ output }}</span></div>
     <div class="buttons">
       <button @click="inputContent">1</button>
       <button @click="inputContent">2</button>
       <button @click="inputContent">3</button>
-      <button @click="remove">删除</button>
+      <button @click="remove">
+        <Icon name="delete"></Icon>
+      </button>
       <button @click="inputContent">4</button>
       <button @click="inputContent">5</button>
       <button @click="inputContent">6</button>
@@ -68,22 +70,37 @@
   .numberPad {
     .output {
       @extend %innerShadow;
-      font-size: 36px;
-      font-family: Consolas, monospace;
-      padding: 9px 16px;
+      span {
+        display: inline-block;
+        height: 36px;
+        font-size: 36px;
+        font-family: Consolas, monospace;
+        line-height: 36px;
+      }
+      padding: 6px 16px;
       text-align: right;
-      height: 72px;
+      height: 48px;
     }
     .buttons {
       @extend %clearfix;
       > button {
+        font-size: 1.3em;
         width: 25%;
-        height: 64px;
+        height: 56px;
         float: left;
         background: transparent;
         border: none;
+        &:nth-child(4) {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .icon {
+            width: 36px;
+            height: 36px;
+          }
+        }
         &.ok {
-          height: 64*2px;
+          height: 56*2px;
           float: right;
         }
         &.zero {

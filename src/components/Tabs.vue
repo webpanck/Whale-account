@@ -31,11 +31,15 @@
 </script>
 
 <style lang="scss" scoped>
+  @import "~@/assets/style/helper.scss";
+
   .tabs {
-    background: #c4c4c4;
+    background: $color-highlight;
     display: flex;
     align-items: center;
     font-size: 24px;
+    color: white;
+
     &-item {
       width: 50%;
       height: 64px;
@@ -43,6 +47,9 @@
       justify-content: center;
       align-items: center;
       position: relative;
+      &.selected {
+        font-weight: bolder;
+      }
       &.selected::after {
         content: '';
         position: absolute;
@@ -50,7 +57,7 @@
         left: 0;
         width: 100%;
         height: 4px;
-        background: #333;
+        background: whitesmoke;
       }
     }
   }

@@ -38,6 +38,8 @@
 </script>
 
 <style lang="scss" scoped>
+  @import "~@/assets/style/helper.scss";
+
   .tags {
     background: white;
     display: flex;
@@ -60,8 +62,9 @@
         margin-right: 12px;
         margin-top: 4px;
         &.selected {
-          background: darken($bg, 50%);
-          color: whitesmoke;
+          background: $color-highlight;
+          color: white;
+          font-weight: bold;
         }
       }
     }

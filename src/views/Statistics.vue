@@ -153,15 +153,6 @@
     }
   }
   ::v-deep {
-    .type-tabs-item {
-      background: #c4c4c4;
-      &.selected {
-        background: white;
-        &::after {
-          display: none;
-        }
-      }
-    }
     .interval-tabs-item {
       height: 48px;
     }

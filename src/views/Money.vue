@@ -1,7 +1,6 @@
 <template>
   <Layout class-prefix="layout">
     <NumberPad :value.sync="record.amount" @submit="saveRecord"></NumberPad>
-    <Tabs :data-source="recordTypeList" :value.sync="record.type"></Tabs>
     <div class="notes">
       <FormItem @update:value="onUpdateNotes" :value="record.notes"
                 field-name="备注" placeholder="在这里输入备注"></FormItem>
@@ -10,6 +9,7 @@
       <FormItem :value.sync="record.createdAt" type="date" field-name="日期"></FormItem>
     </div>
     <Tags @update:value="onUpdateTags"></Tags>
+    <Tabs :data-source="recordTypeList" :value.sync="record.type"></Tabs>
   </Layout>
 </template>
 
@@ -62,7 +62,14 @@
     display: flex;
     flex-direction: column-reverse;
   }
+  $bg: #f2f2f2;
   .notes {
-    padding: 12px 0;
+    background: lighten($bg, 5%);
+  }
+  .createdAt {
+    background: lighten($bg, 5%);
+  }
+  .notes, .createdAt {
+    padding: 4px 0;
   }
 </style>
