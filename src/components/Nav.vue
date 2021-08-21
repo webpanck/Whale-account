@@ -42,7 +42,6 @@
       }
       &.selected {
         color: darken($color-highlight, 25%);
-        //color: #6ebce6;
       }
     }
   }

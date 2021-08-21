@@ -1,13 +1,16 @@
 <template>
   <label class="formItem">
-    <span class="name">{{this.fieldName}}</span>
     <template v-if="type === 'date'">
+      <Icon name="date"></Icon>
+      <span class="name">{{this.fieldName}}</span>
       <input :type="type || 'text'"
              :value="x(value)"
              @input="onValueChanged($event.target.value)"
              :placeholder="placeholder">
     </template>
     <template v-else>
+      <Icon name="note"></Icon>
+      <span class="name">{{this.fieldName}}</span>
       <input :type="type || 'text'"
              :value="value"
              @input="onValueChanged($event.target.value)"
@@ -38,11 +41,16 @@
 </script>
 
 <style lang="scss" scoped>
+  @import "~@/assets/style/helper.scss";
+
   .formItem {
     font-size: 14px;
     display: flex;
     padding-left: 16px;
     align-items: center;
+    .icon {
+      color: darken($color-highlight, 20%);
+    }
     .name {
       padding-right: 16px;
     }
