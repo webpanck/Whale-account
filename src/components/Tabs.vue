@@ -1,8 +1,11 @@
 <template>
-  <ul class="tabs">
-    <li v-for="item in dataSource" :key="item.value" class="tabs-item"
-        :class="liClass(item)" @click="select(item)">{{item.text}}</li>
-  </ul>
+  <div class="tabs-wrapper">
+    <Icon name="whale"></Icon>
+    <ul class="tabs">
+      <li v-for="item in dataSource" :key="item.value" class="tabs-item"
+          :class="liClass(item)" @click="select(item)">{{item.text}}</li>
+    </ul>
+  </div>
 </template>
 
 <script lang="ts">
@@ -33,15 +36,28 @@
 <style lang="scss" scoped>
   @import "~@/assets/style/helper.scss";
 
+  .tabs-wrapper {
+    position: relative;
+    .icon {
+      width: 36px;
+      height: 36px;
+      position: absolute;
+      color: white;
+      top: 32px;
+      left: 16px;
+      transform: translateY(-50%);
+    }
+  }
   .tabs {
     background: $color-highlight;
     display: flex;
+    justify-content: center;
     align-items: center;
-    font-size: 24px;
+    font-size: 20px;
     color: white;
 
     &-item {
-      width: 50%;
+      width: 20%;
       height: 64px;
       display: flex;
       justify-content: center;
